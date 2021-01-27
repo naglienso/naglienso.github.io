@@ -10,25 +10,29 @@ Posta is a tool for researching postMessage communication, it allows you to trac
 # Install
 There are 2 options to install posta and getting started with our postMessage tracking journey.
 
-**1. Run posta in full dev environment with dedicated browser (Chromium) - Recommended**
+## Dev environment
 
+### Prerequisites
 [Node.js](https://nodejs.org/en/download/) is required to be installed for this option
 
+Run posta in full dev environment with dedicated browser (Chromium)
+
 ```bash
-git clone https://github.com/benso-io/posta
-cd posta
-npm install
-node posta **URL**
+1. git clone https://github.com/benso-io/posta
+2. cd posta
+3. npm install
+4. node posta **URL**
 ```
 
-**2. Run posta as a Chrome Extension**
+## Chrome Extension
+Run posta as a Chrome Extension
 
 ```bash
-git clone https://github.com/gourarie/post-apocalypse.git
-navigate to chrome://extensions/
-Click on "Load unpacked"
-Choose the "chrome-extension" folder inside posta
-Click on Posta's icon at the extensions bar.
+1. git clone https://github.com/gourarie/post-apocalypse.git
+2. navigate to chrome://extensions/
+3. Click on "Load unpacked"
+4. Choose the "chrome-extension" folder inside posta
+5. Click on Posta's icon at the extensions bar.
 ```
 
 # How to use
@@ -67,16 +71,15 @@ Therefore, In order to continue with our exploitation we will need to gain commu
 
 We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
 
-
-
  
 ## Known Issues
 due to browser extension limitations there are some known issues
 1. Using posta with alot of tabas might lag, we recommend dedicated browser
 2. Sometimes you might need ot refresh the page
 3. posta wont be enabled to inject itself in some cases (For example with data:uri)
-# Authors ## to edit
+
+# Authors
 Chen Gour Arie<br>
 [Barak Tawily](https://quitten.github.io/)<br>
-Gal Nagli
+[Gal Nagli](https://github.com/NagliNagli)<br>
 Omer Yaron
