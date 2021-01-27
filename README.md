@@ -1,4 +1,4 @@
-![enso_logo](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/Logo%20vertical%20-%20dark%403x.png)
+![enso_logo](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/benso-posta.png)
 
 # Posta
 Posta is a tool for researching postMessage communication, it allows you to track, explore and exploit postMessages vulnerabilities, with many abilities, like replay messages sent between windows of any attached browser.
@@ -8,14 +8,14 @@ Posta is a tool for researching postMessage communication, it allows you to trac
 ![exploit_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_page.png)
 
 # Install
-There are 2 options to install posta and getting started with our postMessage tracking journey.
+There are 2 options to install Posta and getting started with our postMessage tracking journey.
 
 ## Dev environment
 
 ### Prerequisites
 [Node.js](https://nodejs.org/en/download/) is required to be installed for this option
 
-Run posta in full dev environment with dedicated browser (Chromium)
+Run Posta in full dev environment with dedicated browser (Chromium)
 
 ```bash
 1. git clone https://github.com/benso-io/posta
@@ -24,19 +24,19 @@ Run posta in full dev environment with dedicated browser (Chromium)
 ```
 
 ## Chrome Extension
-Run posta as a Chrome Extension
+Run Posta as a Chrome Extension
 
 ```bash
 1. git clone https://github.com/gourarie/post-apocalypse.git
 ```
 2. navigate to chrome://extensions/
 3. Click on "Load unpacked"
-4. Choose the "chrome-extension" folder inside posta and upload it to your browser.
+4. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
 
 # How to use - Dev environment
 1. Launch the dedicated chromium session with the following command
 ```bash
-node posta **URL**
+node posta <URL>
 ```
 2. Click on the Posta extension to be navigated into the UI
 
@@ -78,12 +78,6 @@ Therefore, In order to continue with our exploitation we will need to gain commu
 
 We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
 
- 
-## Known Issues
-due to browser extension limitations there are some known issues
-1. Using posta with alot of tabas might lag, we recommend dedicated browser
-2. Sometimes you might need ot refresh the page
-3. posta wont be enabled to inject itself in some cases (For example with data:uri)
 
 # Authors
 Chen Gour Arie<br>
