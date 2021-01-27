@@ -4,7 +4,7 @@
 
 **Posta** is a tool for researching `postMessage` communication. It allows you to track, explore and exploit `postMessage` vulnerabilities, and includes features such as replaying messages sent between windows within any attached browser.
 
-![main_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/main_page.png)
+![main_page](./images/main_page.png)
 
 ## Prerequisites
 * Google Chrome / Chromium
@@ -12,7 +12,7 @@
 
 ## Installation
 
-### Dev environment
+### Development Environment
 
 Run Posta in full dev environment with dedicated browser (Chromium)
 
@@ -47,24 +47,19 @@ git clone https://github.com/gourarie/post-apocalypse.git
 8. Browse to the website you would like to examine
 9. Click on the Posta extension to be navigated into the UI
 
-## Tabs:
-
+## Tabs
 At the tabs section we can find our main origin, with the Iframes he hosts and communicates with through the session.
-
 We can choose the specific frame by clicking on it, and observe the postMessages related to that frame only.
 
-![tabs](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/tabs.png)
+![tabs](./images/tabs.png)
 
-## Messages:
-
-At the messages section, we can inspect the entire postMessage traffic which is being sent from the origin to it's Iframes, and the opposite way.
-
+## Messages
+In the *Messages* section, we can inspect all `postMessage` traffic being sent from the origin to its iframes, and vice versa.
 We can select specific communication for further examination by clicking on it.
+The 8Listeners* area presents the code which is in charge of handling the communication, we can click and copy its contents for JS code observation.
 
-The Listeners area presents the code which is in charge of handeling the communication, we can click and copy it's contents for the JS code observation.
-
-![messages](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/messages.png)
-![listener](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/listeners.png)
+![messages](./images/messages.png)
+![listener](./images/listeners.png)
 
 ## Console
 
@@ -72,7 +67,7 @@ At the console sections, we can modify the original postMessage traffic, and rep
 
 We should make tests and see if we can affect the behaviour of the website by changing the postMessage content, If we manage to do so, It's time to try and exploit if from different origin, by Clicking the "Simulate exploit"
 
-![console](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/console.png)
+![console](./images/console.png)
 
 
 ## Exploit
@@ -84,7 +79,6 @@ Therefore, In order to continue with our exploitation we will need to gain commu
 We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
 
 ![exploit_content](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_content.png)
-
 
 # Authors
 - Chen Gour Arie
