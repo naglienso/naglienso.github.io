@@ -10,11 +10,13 @@
 * Google Chrome / Chromium
 * [Node.js](https://nodejs.org/en/download/) (optional)
 
-## Dev environment
+## Installation
+
+### Dev environment
 
 Run Posta in full dev environment with dedicated browser (Chromium)
 
-### Installation
+1. Install Posta
 
 ```bash
 git clone https://github.com/benso-io/posta
@@ -22,18 +24,15 @@ cd posta
 npm install
 ```
 
-### How to use
-
-1. Launch the dedicated chromium session with the following command
+2. Launch the dedicated chromium session with the following command
 ```bash
 node posta <URL>
 ```
-2. Click on the Posta extension to be navigated into the UI
+3. Click on the Posta extension to be navigated into the UI
 
-## Chrome Extension
+### Chrome Extension
 Run Posta as a Chrome / Chromium Extension
 
-### Installation
 1. Clone the repo
 
 ```bash
@@ -43,12 +42,10 @@ git clone https://github.com/gourarie/post-apocalypse.git
 3. Make sure "Developer mode" is enabled
 4. Click on "Load unpacked"
 5. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
-
-### How to use 
-1. Load the extension
-2. Pin the extension to your browser
-3. Browse to the website you would like to examine
-4. Click on the Posta extension to be navigated into the UI
+6. Load the extension
+7. Pin the extension to your browser
+8. Browse to the website you would like to examine
+9. Click on the Posta extension to be navigated into the UI
 
 ## Tabs:
 
