@@ -32,18 +32,17 @@ Run Posta in full dev environment with dedicated browser (Chromium)
 Run Posta as a Chrome / Chromium Extension
 
 1. Clone the repo
-
-```bash
-git clone https://github.com/gourarie/post-apocalypse.git
-```
-2. Navigate to chrome://extensions/
-3. Make sure "Developer mode" is enabled
-4. Click on "Load unpacked"
-5. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
-6. Load the extension
-7. Pin the extension to your browser
-8. Browse to the website you would like to examine
-9. Click on the Posta extension to be navigated into the UI
+   ```bash
+   git clone https://github.com/benso-io/posta.git
+   ```
+1. Navigate to chrome://extensions/
+1. Make sure "Developer mode" is enabled
+1. Click on "Load unpacked"
+1. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
+1. Load the extension
+1. Pin the extension to your browser
+1. Browse to the website you would like to examine
+1. Click on the Posta extension to be navigated into the UI
 
 ## Tabs
 At the tabs section we can find our main origin, with the Iframes he hosts and communicates with through the session.
