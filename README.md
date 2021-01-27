@@ -21,7 +21,6 @@ Run posta in full dev environment with dedicated browser (Chromium)
 1. git clone https://github.com/benso-io/posta
 2. cd posta
 3. npm install
-4. node posta **URL**
 ```
 
 ## Chrome Extension
@@ -29,15 +28,23 @@ Run posta as a Chrome Extension
 
 ```bash
 1. git clone https://github.com/gourarie/post-apocalypse.git
+```
 2. navigate to chrome://extensions/
 3. Click on "Load unpacked"
-4. Choose the "chrome-extension" folder inside posta
-5. Click on Posta's icon at the extensions bar.
-```
+4. Choose the "chrome-extension" folder inside posta and upload it to your browser.
 
-# How to use
-1. Navigate to a website
-2. Open the posta extension and inspect the postMessages traffic.
+# How to use - Dev environment
+1. Launch the dedicated chromium session with the following command
+```bash
+node posta **URL**
+```
+2. Click on the Posta extension to be navigated into the UI
+
+# How to use - Chrome Extension
+1. Load the extension
+2. Pin the extension to your browser
+3. Browse to the website you would like to examine
+4. Click on the Posta extension to be navigated into the UI
 
 ## Tabs:
 ![tabs](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/tabs.png)
