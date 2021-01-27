@@ -6,41 +6,45 @@
 
 ![main_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/main_page.png)
 
-### Prerequisites
-# Install
-There are 2 options to install Posta and getting started with our postMessage tracking journey.
+## Prerequisites
+* Google Chrome / Chromium
+* [Node.js](https://nodejs.org/en/download/) (optional)
 
-## Development Environment
-
-### Prerequisites
-[Node.js](https://nodejs.org/en/download/) is required to be installed for this option
+## Dev environment
 
 Run Posta in full dev environment with dedicated browser (Chromium)
 
-```bash
-1. git clone https://github.com/benso-io/posta
-2. cd posta
-3. npm install
-```
-
-## Chrome Extension
-Run Posta as a Chrome Extension
+### Installation
 
 ```bash
-1. git clone https://github.com/gourarie/post-apocalypse.git
+git clone https://github.com/benso-io/posta
+cd posta
+npm install
 ```
-2. navigate to chrome://extensions/
-3. Click on "Load unpacked"
-4. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
 
-# How to use - Dev environment
+### How to use
+
 1. Launch the dedicated chromium session with the following command
 ```bash
 node posta <URL>
 ```
 2. Click on the Posta extension to be navigated into the UI
 
-# How to use - Chrome Extension
+## Chrome Extension
+Run Posta as a Chrome / Chromium Extension
+
+### Installation
+1. Clone the repo
+
+```bash
+git clone https://github.com/gourarie/post-apocalypse.git
+```
+2. Navigate to chrome://extensions/
+3. Make sure "Developer mode" is enabled
+4. Click on "Load unpacked"
+5. Choose the "chrome-extension" folder inside Posta and upload it to your browser.
+
+### How to use 
 1. Load the extension
 2. Pin the extension to your browser
 3. Browse to the website you would like to examine
@@ -81,9 +85,9 @@ At the exploit page, Posta will try and host the specified origin as Iframe to i
 Therefore, In order to continue with our exploitation we will need to gain communication referance with our origin by initiating the window.open method, which is being done by clicking on "Open as tab"
 
 We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
+
 ![exploit_content](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_content.png)
 
-![exploit_button](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_button.png)
 
 # Authors
 - Chen Gour Arie
