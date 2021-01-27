@@ -17,18 +17,16 @@
 Run Posta in full dev environment with dedicated browser (Chromium)
 
 1. Install Posta
-
-```bash
-git clone https://github.com/benso-io/posta
-cd posta
-npm install
-```
-
-2. Launch the dedicated chromium session with the following command
-```bash
-node posta <URL>
-```
-3. Click on the Posta extension to be navigated into the UI
+   ```bash
+   git clone https://github.com/benso-io/posta
+   cd posta
+   npm install
+   ```
+1. Launch the dedicated chromium session with the following command
+   ```bash
+   node posta <URL>
+   ```
+1. Click on the Posta extension to be navigated into the UI
 
 ### Chrome Extension
 Run Posta as a Chrome / Chromium Extension
