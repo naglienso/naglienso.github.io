@@ -1,7 +1,11 @@
+![enso_logo](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/Logo%20vertical%20-%20dark%403x.png)
+
 # Posta
 Posta is a tool for researching postMessage communication, it allows you to track, explore and exploit postMessages vulnerabilities, with many abilities, like replay messages sent between windows of any attached browser.
 
-![alt tag](https://raw.githubusercontent.com/gourarie/post-apocalypse/master/images/posta.png)
+![main_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/main_page.png)
+
+![exploit_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_page.png)
 
 # Install
 1. Run posta in full dev environment with dedicated browser (Chromium) - Recommended
