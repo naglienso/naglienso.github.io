@@ -1,7 +1,8 @@
-![enso_logo](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/benso-posta.png)
-
 # Posta
-Posta is a tool for researching postMessage communication, it allows you to track, explore and exploit postMessages vulnerabilities, with many abilities, like replay messages sent between windows of any attached browser.
+
+<br /><p align="center"><a href="https://github.com/benso-io/posta" title="Posta"><img height="350" src="./benso.png" alt="enso.security - Posta"></a></p><br/>
+
+**Posta** is a tool for researching `postMessage` communication. It allows you to track, explore and exploit `postMessage` vulnerabilities, and includes features such as replaying messages sent between windows within any attached browser.
 
 ![main_page](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/main_page.png)
 
@@ -10,7 +11,7 @@ Posta is a tool for researching postMessage communication, it allows you to trac
 # Install
 There are 2 options to install Posta and getting started with our postMessage tracking journey.
 
-## Dev environment
+## Development Environment
 
 ### Prerequisites
 [Node.js](https://nodejs.org/en/download/) is required to be installed for this option
@@ -46,14 +47,14 @@ node posta <URL>
 3. Browse to the website you would like to examine
 4. Click on the Posta extension to be navigated into the UI
 
-## Tabs:
+## Tabs
 ![tabs](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/tabs.png)
 
 At the tabs section we can find our main origin, with the Iframes he hosts and communicates with through the session.
 
 We can choose the specific frame by clicking on it, and observe the postMessages related to that frame only.
 
-## Messages:
+## Messages
 ![messages](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/messages.png)
 
 At the messages section, we can inspect the entire postMessage traffic which is being sent from the origin to it's Iframes, and the opposite way.
@@ -67,20 +68,19 @@ The Listeners area presents the code which is in charge of handeling the communi
 
 At the console sections, we can modify the original postMessage traffic, and replay the messages with the tampered values which will get sent from the Origin to it's Iframe.
 
-We should make tests and see if we can affect the behaviour of the website by changing the postMessage content, If we manage to do so, It's time to try and exploit if from different origin, by Clicking the "Simulate exploit"
+We should make tests and see if we can affect the behaviour of the website by changing the postMessage content, If we manage to do so, It's time to try and exploit if from different origin, by clicking the "Simulate exploit"
 
 ## Exploit
 ![exploit_phase](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_phase.png)
 
-At the exploit page, Posta will try and host the specified origin as Iframe to initiate postMessage communication, Most of the time we won't be able to do so due to Strict X Frame Options enabled on the origin website.
+At the exploit page, Posta will try and host the specified origin as an `iframe` to initiate `postMessage` communication. Most of the time we won't be able to do so due to Strict X-Frame-Options being enabled on the origin website.
 
-Therefore, In order to continue with our exploitation we will need to gain communication referance with our origin by initiating the window.open method, which is being done by clicking on "Open as tab"
+Therefore, in order to continue with our exploitation we will need to gain communication referance with our origin by initiating the `window.open` method, which is done by clicking on "Open as tab".
 
-We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
-
+We have the console to our right which will help us modify and craft our specified payloads and test them in Cross-Origin Communication, initiated by clicking on the "Exploit" button.
 
 # Authors
-Chen Gour Arie<br>
-[Barak Tawily](https://quitten.github.io/)<br>
-[Gal Nagli](https://github.com/NagliNagli)<br>
-Omer Yaron
+- Chen Gour Arie
+- [Barak Tawily](https://quitten.github.io/)
+- [Gal Nagli](https://github.com/NagliNagli)
+- Omer Yaron
