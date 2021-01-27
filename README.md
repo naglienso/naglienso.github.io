@@ -49,6 +49,8 @@ At the messages section, we can inspect the entire postMessage traffic which is 
 
 We can select specific communication for further examination by clicking on it.
 
+The Listeners area presents the code which is in charge of handeling the communication, we can click and copy it's contents for the JS code observation.
+
 ## Console
 ![console](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/console.png)
 
@@ -56,9 +58,15 @@ At the console sections, we can modify the original postMessage traffic, and rep
 
 We should make tests and see if we can affect the behaviour of the website by changing the postMessage content, If we manage to do so, It's time to try and exploit if from different origin, by Clicking the "Simulate exploit"
 
-2. Use one of the [proxy-helpers](https://github.com/gourarie/post-apocalypse/tree/master/proxy-helpers) to inject [agent.js](https://github.com/gourarie/post-apocalypse/blob/master/src/agent.js)
-3. Make sure your browser is passing through the proxy and agent.js found in responses `head` tag
-4. Browse to http://localhost:28010/ and hack
+## Exploit
+![exploit_phase](https://raw.githubusercontent.com/naglienso/naglienso.github.io/main/images/exploit_phase.png)
+
+At the exploit page, Posta will try and host the specified origin as Iframe to initiate postMessage communication, Most of the time we won't be able to do so due to Strict X Frame Options enabled on the origin website.
+
+Therefore, In order to continue with our exploitation we will need to gain communication referance with our origin by initiating the window.open method, which is being done by clicking on "Open as tab"
+
+We have the console to our right which will help us to modify and craft our specified payloads and test them in Cross Origin Communication, initiated by clicking on the "Exploit" Button.
+
 
 
  
