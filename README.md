@@ -1,16 +1,22 @@
-# Posta
+# Cloudflare DNS Collector
 
-<br /><p align="center"><a href="https://github.com/benso-io/posta" title="Posta"><img height="320" src="./images/benso-posta.png" alt="enso.security - Posta"></a></p>
+<br /><p align="center"><img height="320" src="./images/1200px-Cloudflare-logo-vector.svg.png" alt="Cloudflare Collector"></a></p>
 
-**Posta** is a tool for researching `postMessage` communication. It allows you to track, explore and exploit `postMessage` vulnerabilities, and includes features such as replaying messages sent between windows within any attached browser.
-
-![main_page](./images/main_page.png)
 
 ## Prerequisites
-* Google Chrome / Chromium
-* [Node.js](https://nodejs.org/en/download/) (optional)
+In order for our DNS Collector CloudFlare collector to function correctly we will need DNS Zone Read only API token from the customer
 
-## Installation
+## API Key Creation
+
+1. Navigate to https://dash.cloudflare.com/profile/api-tokens
+1. Click on "Create Token"
+1. Use the "Edit zone DNS" template
+1. Use the following permissions like the image below:
+   * ZONE DNS Read
+   * Include Specific Zone with the specified TLD
+   * IP Address filtering (optional)
+   
+<br /><p align="center"><img height="320" src="./images/TOKEN.png" alt="Cloudflare Collector"></a></p>   
 
 ### Development Environment
 
