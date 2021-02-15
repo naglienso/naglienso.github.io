@@ -1,80 +1,70 @@
 ---
 layout: single
-title: Broken Access Control on samsung.com subdomain leads to Mass Account Takeover of Samsung employees application accounts
-date: 2020-12-18
+title: Exploitation through vulnerability inheritance - Attacking companies and scoring bounties through 3rd party integrations
+date: 2021-02-15
 classes: wide
 header:
-  teaser: /images/Samsung_teaser.png
+  teaser: /images/3rdparty_teaser.pn
 tags:
 
   -BugBounty
 --- 
 
-**Broken Access Control on samsung.com subdomain leads to Mass Account Takeover of Samsung employees application accounts**
+**Exploitation through vulnerability inheritance - Attacking companies and scoring bounties through 3rd party integrations**
 
-![preview](/images/Samsung_teaser.png)
+![preview](/images/3rdparty_teaser.png)
 
-## Greetings
+## Agenda
 
-As we have entered the month of december, I have decided to freshen up some targets and decided to give a look at Samsung's Bug Bounty programs as I had good experience with them at the past.
+During my last couple of months engaging with bug bounties on companies who hold responsible disclosure policy, I have encountered what might be called as some sort of routine, which helped me score bounties on companies regardless of their size.
 
-Samsung operates their bounty policy on the following link [Policy](https://security.samsungmobile.com/)
+This is due to what I will refer on this blog post as "Vulnerability Inheritance"
 
-As they state that only vulnerabilities affecting the samsung mobile/tv team services or devices is eligible for bounty, you can't really know what services actually belongs to them, so I have decided to look at the *.samsung.com scope
+In this blog I'll cover the following:
+
+![preview](/images/agenda.png)
 
 
-### Reconnaissance
+### General
 
-![recon image](/images/recon1.jpg)
+In today’s world, software companies are growing rapidly and so the need for new designs and features to implement ontop of the company current niche, which draws large portion of the software developers attention.
 
-As you might have read from my previous blog post, there is no magic when it comes to reconnaissance.
+Companies will opt to “adopt” 3rd party services to achieve certain functionality goals, which would give them a "cheap" and time rewarding solution instead of investing manpower on maintaining and devloping certain "sideways" features which are already being maintaned and constantly developed by big companies.
 
-Utilizing my bash script which integrates the known open source tools for subdomain discovery presented 853 alive probed subdomain results
+While doing so is indeed rewarding and has many benefits, it do come out with a security price which needs to be considered and handeld correctly by the companies.
 
-![recon](/images/853.png)
+The 2 main methods in which we can integrate 3rd party services within our company domains are the following:
 
-The nuclei scan for known vulnerabilities didn't return any significant result, so it was time to dive in the subdomains and look manually for intersting information.
+![2ways](/images/2ways.png)
 
-At first it would be normal to look at the subdomains which include intersting keywords as dev,admin,stage.
+The main area which I will cover are within the CNAME and A records integrations, for <script> and <iframe> integrations, there are several vulnerabilities which can arise and I'd suggest watching our Chief Architect at enso.security talk about postMessage exploitations which we had given earlier this year.
 
-Eventually this led me to explore few subdomains which consisted those keywords, and in particular the vulnerable subdomain https://redacted.samsung.com/
+**Understanding CNAMES and A records**
 
-### Manual Inspection
+CNAME records can be used to alias one name to another. CNAME stands for Canonical Name.
+A common example is when you have both example.com and www.example.com pointing to the same application and hosted by the same server. 
+To avoid maintaining two different records, it’s common to create:
+* An A record for example.com pointing to the server IP address
+* A CNAME record for www.example.com pointing to example.com
 
-Navigating to https://redacted.samsung.com/ presented us with a static web page with a small login button up top.
+As a result, example.com points to the server IP address, and www.example.com points to the same address via example.com. If the IP address changes, you only need to update it in one place: just edit the A record for example.com, and www.example.com automatically inherits the changes.
 
-![recon](/images/static_page.png)
+**Understanding CNAMES and A records DNS flow**
 
-Observing the login functioniallity was just utilizing the SSO of samsung.com, I was redirected to account.samsung.com and had to enter my account information,
-and later on redirected to fill up another few details at the origin of the request.
+![dns_cname](/images/cname_dns.png)
 
-![login](/images/flow_video.gif)
+By observing the DNS flow above, you could already start to glimpse the point why security vulnerabilities are being arised from integrations as such.
 
-We are unauthorized to access the data which the subdomain servers, probably because we are not samsung employees and as we need to wait for the manager approval.
+There are 2 ways to implement 3rd party integrations through DNS records:
 
-So, pretty much a dead end?
+* Assigning a CNAME record from a subdomain to the 3rd party service, by doing so we "alias" the contents from the 3rd party website to serve on our subdomain.
 
-### Exploitation
+* Assigning A record to an IP address which will run the vendor's service with slight modificatitions.
 
-While observing the functionallities my Burp proxy was up and running, and the JS Link Finder extension came clutch.
+![flow_nagli](/images/flow.png)
 
-JS Link Finder is the Burp Extension for a passively scanning JavaScript files for endpoint links. - Export results the text file - Exclude specific 'js' files e.g. jquery, google-analytics
 
-[LinkFinder link](https://portswigger.net/bappstore/0e61c786db0c4ac787a08c4516d52ccf)
 
-Observing the links which the extension found we could notice that there are many rest api endpoints which could be intersting to determine if they are accessible from unauthenticated and unauthorized user perspective
-
-As there were 600 intersting links to look on, doing so manually wouldn't be effective, you can copy the complete list from JS link finder, create a new text file, cutting it to remove the ordering by (" cut -d " " -f 3")
-
-Supplying the list to ffuf we would notice several intersting endpoints which return 200, so this narrowed the list to be compatible with manual observation.
-
-![endpoint](/images/endpoint.png)
-
-The following endpoint proved to be critically severe (It's fixed now):
-
-```javascript
-https://redacted.samsung.com/rest/v1/system/list/
-```
 
 The page supplied every user which used the login form with his account, with the following details:
 
