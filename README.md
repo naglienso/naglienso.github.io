@@ -63,7 +63,11 @@ There are 2 ways to implement 3rd party integrations through DNS records:
 
 ![flow_nagli](/images/flow.png)
 
+After understanding the basics, we can dive deeper into the threat and attack models section
 
+### Threat and attack models
+
+![threat](/images/threat.png)
 
 
 The page supplied every user which used the login form with his account, with the following details:
