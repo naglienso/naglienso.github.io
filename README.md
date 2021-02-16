@@ -170,7 +170,29 @@ Storing this as the Cross Site Scripting payload will send to our attacker contr
 
 **Cookies exfiltration**
 
+When companies are setting up cookies on their main websites, they tend to configure them with domain attribute, with makes them accessible and stored on the respective subdomains as well.
+
+As per MDN:
+```
+Domain attribute
+The Domain attribute specifies which hosts are allowed to receive the cookie. If unspecified, it defaults to the same host that set the cookie, excluding subdomains. If Domain is specified, then subdomains are always included. Therefore, specifying Domain is less restrictive than omitting it. However, it can be helpful when subdomains need to share information about a user.
+
+For example, if Domain=mozilla.org is set, then cookies are available on subdomains like developer.mozilla.org.
+```
+
+It means that if we manage to find XSS vulnerability on our subdomain, we can exfiltrate the cookies which are being set on the parent domain, only if they are not protected by HTTPOnly flags.
+
+We can use the cookies attached to issue requests from the victim perspective (such as CSRF attacks) regardless of the cookies being set to HTTPOnly.
+
+![cookie](/images/cookie.png)
+
 **Business Logic Errors**
+
+Similar to the impact of subdomain takeover, instead of stealing the domain and to show a generic alert popup from that subdomain, we can use that subdomain to demonstrate legitimate service claiming to be on behalf of the original domain, while its actually being managed by the attacker.
+
+Let's take to an example if we managed to takeover a shopify domain of the target domain, served on shop.target.com:
+
+![business](/images/business.png)
 
 **Open Redirect**
 
