@@ -268,11 +268,35 @@ So, we found a target, and we managed to find vulnerabilities on it such as XSS 
 
 However, the potenial is way bigger, now we have a "0 day" on web application service, and we should scrape the internet at scale to find other big vendors who uses the same service to host content on their domains.
 
-![scrape](/images/scrape.png)
+![fingerprint](/images/fingerprint.png)
 
+
+**Google Dorks**
+
+**Customers page**
+
+**Reverse CNAME lookup**
+
+**Path Fingerprinting**
 
 ### Practical exploitations
 
+**Account Takeover**
+
+**RXSS Bugcrowd**
+
+**RXSS hackerone**
+
+**Open Redirect twitter/amazon/facebook/snapchat**
+
+
+
 ### Takeaways
+
+**This subject will only grow and become more frequent**
+
+**Caution when assigning CNAME records**
+
+**Monitoring**
 
 
