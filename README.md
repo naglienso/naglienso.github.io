@@ -4,7 +4,7 @@ title: Exploitation through vulnerability inheritance - Attacking companies and 
 date: 2021-02-15
 classes: wide
 header:
-  teaser: /images/3rdparty_teaser.pn
+  teaser: /images/3rdparty_teaser.png
 tags:
 
   -BugBounty
@@ -194,9 +194,14 @@ Let's take to an example if we managed to takeover a shopify domain of the targe
 
 ![business](/images/business.png)
 
-**Open Redirect**
+**Open Redirect as a chain**
+
+Assuming we have found open redirect on our vulnerable 3rd party vendor, which affects our subdomain shop.galnagli.com.
+This could be used as a chain to more severe attacks, some companies would accept the open redirect as P4, but this should be considered last resort after trying to achieve greater affect and impact through different and more severe vulnerabilities such as Account Takeover or SSRF Bypasses.
 
 **Account Takeover**
+
+Let's take a look at the following example:
 
 **SSRF Bypass**
 
