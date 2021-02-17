@@ -222,6 +222,55 @@ Similar to the previous vulnerable scenario, we can achieve SSRF by bypassing al
 
 ### Reconnaissance
 
+The Reconnaissance part should be divded to 2 main parts:
+
+![recon](/images/2recon.png)
+
+Our first take is to find a potenial target to test for possible vulnerabilities.
+
+I prefer to scan the our target first and look for 3rd parties services which are integrated already in their flow, although a researcher could opt to find web 0-days on 3rd party vendor services before looking for any target, I'm not sure it hold the ethical phase if the vendor won't operate any responsible disclosure policy (which is really bad for vendor's to not have one of those)
+
+And you might find a vulnerability which won't affect any target who offers bug bounties or CVE to award your effort, so going through our target assets and expanding further should be the way to go.
+
+We are mostly interested to find the CNAME records and potenial A records with titles who indicate the usage of 3rd party services.
+
+There are many unix tools which could help us to determine the if certain host (https://www.example.com) has CNAME pointer to certain website, the most simple way to check for those would to run a dig scan
+
+```javascript
+dig target.com CNAME
+```
+which should return in response similar answer to:
+
+```javascript
+shop.galnagli.com.     300     IN      CNAME   galnagli.myshopify.com
+```
+
+Although, there are better ways and faster tools which would let us run over large portion of domains and return on the same iteration the title of the webpage, and it's CNAME.
+using the opensource httpx tool by ProjectDiscovery we can use the following script to scan a list of subdomains and extract their CNAMES records and titles, given a list of subdomains with their respective status code.
+
+```javascript
+cat subdomains.txt | httpx -cname -title -status-code > rawdata.txt
+```
+
+```javascript
+https://shop.galnagli.com [404] [This shopping website is unclaimed] [galnagli.myshop.com]
+https://events.galnagli.com [200] [Welcome to eventstoday platform] [galnagli.eventstoday.com]
+```
+
+So we have determined that our subdomain has CNAME pointer to 3rd party vendor, assuming our target accepts wildcard reports and going over the entire blog until this point, we can explore the for vulnerabilities on the vendors website and apply those on the in-scope subdomain.
+
+Even if events.galnagli.com didn't have a CNAME record to eventstoday, and was hosting it on a IP address with A record, the title of the webpage would exfiltrate the fact that it's a 3rd party service.
+
+Apart from automation, we can never takeaway from manually inspecting websites. 
+we could usually encounter via the sourcecode image locations or "signatures" on the page the fact that we are being served a 3rd party vendors code.
+
+So, we found a target, and we managed to find vulnerabilities on it such as XSS or Open-Redirect, that's great and should count as a valid report.
+
+However, the potenial is way bigger, now we have a "0 day" on web application service, and we should scrape the internet at scale to find other big vendors who uses the same service to host content on their domains.
+
+![scrape](/images/scrape.png)
+
+
 ### Practical exploitations
 
 ### Takeaways
