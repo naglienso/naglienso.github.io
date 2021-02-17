@@ -203,7 +203,22 @@ This could be used as a chain to more severe attacks, some companies would accep
 
 Let's take a look at the following example:
 
+![redirectko](/images/redirect_tko.png)
+
+While this issue looks straight forward like regular open redirect to account takeover, it's not that case so often.
+Because we have another location to redirect through, we will often encounter a redirection chain which won't carry the authentication code throughout the entire process, we need to have certain redirection which fetches and issues the call through the DOM of certain page, and only redirects to the final domain from the original initiator
+
+```javascript
+https://galnagli.com - > https://shop.galnagli.com -> https://sadf.burpcollaborator.com - Most likely won't carry the auth code.
+https://galnagli.com - > **middleman redirection processing page** -> https://sadf.burpcollaborator.com - Most likely will work.
+```
+
+
 **SSRF Bypass**
+
+Similar to the previous vulnerable scenario, we can achieve SSRF by bypassing allowed whitelisted wildcard urls at certain scenarios.
+
+![ssrf](/images/ssrf.png)
 
 ### Reconnaissance
 
