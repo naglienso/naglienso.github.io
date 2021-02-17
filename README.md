@@ -226,7 +226,7 @@ The Reconnaissance part should be divded to 2 main parts:
 
 ![recon](/images/2recon.png)
 
-Our first take is to find a potenial target to test for possible vulnerabilities.
+Our first task is to find a potenial target to test for possible vulnerabilities.
 
 I prefer to scan the our target first and look for 3rd parties services which are integrated already in their flow, although a researcher could opt to find web 0-days on 3rd party vendor services before looking for any target, I'm not sure it hold the ethical phase if the vendor won't operate any responsible disclosure policy (which is really bad for vendor's to not have one of those)
 
