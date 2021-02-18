@@ -349,7 +349,7 @@ also, hundred of thousands websites on total affected from the "0 days" on these
 - [X] Open Redirect on 2 Learning platforms
 - [X] Account takeover on Survey platform
 
-Proof of concepts
+**Proof of concepts**
 
 ![pocs](/images/pocs.png)
 
@@ -361,4 +361,4 @@ Proof of concepts
 
 **Monitoring**
 
-
+## END
