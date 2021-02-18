@@ -296,6 +296,46 @@ Personally I have used spyse's service, and it worked just fine.
 
 **Path Fingerprinting**
 
+Sometimes, we find our vulnerability on a custom path which seems pretty unique and it could be used as an identifier for potenial vulnerability.
+We have great open source tools such as meg by tomnomnom or Nuclei by ProjectDiscovery which can help us either create a template or query the request with the certain path
+
+Example of creating a template with nuclei .yaml templates:
+
+```javascript
+id: welearn-redirect
+
+info:
+  name: Open Redirect vulnerability on welearn websites
+  author: Gal Nagli
+  severity: Medium
+  tags: redirect
+
+
+requests:
+  - method: GET
+
+    path:
+      - "{{BaseURL}}/api/welearn/v2/exitnotice?goto=http://evil.com"
+
+    matchers-condition: and
+    matchers:
+      - type: status
+        status:
+          - 302
+      - type: word
+        words:
+          - "<a href=\"http://evil.com>""
+        condition: or
+        part: body
+ ```
+
+What this template will check is giving a request to our URL with the specific path supplied, is the response returns 302 status code with the words ```<a href=https://evil.com>``` in it? if so - pop an alert.
+  
+You save your file as welearn-redirect.yaml, add it to your nuclei templates and can run it on millions of subdomains in no-time.
+
+![path](/images/path.png)
+
+
 ### Practical exploitations
 
 **Account Takeover**
