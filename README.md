@@ -338,14 +338,18 @@ You save your file as welearn-redirect.yaml, add it to your nuclei templates and
 
 ### Practical exploitations
 
-**Account Takeover**
+Unfortunately, at this point of time I don't have permission to disclose the full details of my findings as 6 month haven't gone by yet, however among all my findings had affected the following companies:
 
-**RXSS Bugcrowd**
+![impacted](/images/impacted.png)
 
-**RXSS hackerone**
+And hundred of thousands websites on total from the "0 days" on these 3rd party vendors (which some of those are not fixed yet)
 
-**Open Redirect twitter/amazon/facebook/snapchat**
-
+**Most Common Findings**
+- [X] Subdomain Takeovers
+- [X] Stored XSS on 3rd party email templates
+- [X] Reflected XSS on events platform
+- [X] Open Redirect on 2 Learning platforms
+- [X] Account takeover on Survey platform
 
 
 ### Takeaways
