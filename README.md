@@ -351,6 +351,9 @@ And hundred of thousands websites on total from the "0 days" on these 3rd party 
 - [X] Open Redirect on 2 Learning platforms
 - [X] Account takeover on Survey platform
 
+Proof of concepts
+
+![pocs](/images/pocs.png)
 
 ### Takeaways
 
