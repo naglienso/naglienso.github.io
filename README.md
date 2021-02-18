@@ -273,9 +273,26 @@ However, the potenial is way bigger, now we have a "0 day" on web application se
 
 **Google Dorks**
 
+Common google dorking patterns which can aid us in finding more potenial vulnerable targets will be utilized by the "site", "inurl" and "intext" Google dorks
+
+![dorks](/images/dorks.png)
+
 **Customers page**
 
+Often, one of the most benefiting and simple solutions expanding our vulnerable targets batch is to navigate to the 3rd party vendors, which usually contains a Customer or About us page with data about new targets to explore.
+
+Sometimes you could get indication of the number of vulnerable assets, as they vendor might state "Trusted by 100K Companies around the world", that's surely good news!
+
 **Reverse CNAME lookup**
+
+One of the most accurate and to the point methods to find vulnerable targets is by utilizing Reverse CNAME lookups which is being offered by several online services.
+
+This solution might not be free, those are services like Shodan, Censys or Spyse who scrape the entire internet assets data and store them into their databases.
+By doing so they allow us to filter our searches to find the CNAME pointers values of assets, by looking up for the 3rd party vendor CNAME Scheme.
+
+Personally I have used spyse's service, and it worked just fine.
+
+![dorks](/images/dorks.png)
 
 **Path Fingerprinting**
 
