@@ -292,7 +292,7 @@ By doing so they allow us to filter our searches to find the CNAME pointers valu
 
 Personally I have used spyse's service, and it worked just fine.
 
-![dorks](/images/dorks.png)
+![dorks](/images/reverse_cname.png)
 
 **Path Fingerprinting**
 
