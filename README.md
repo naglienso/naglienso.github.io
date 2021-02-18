@@ -338,11 +338,9 @@ You save your file as welearn-redirect.yaml, add it to your nuclei templates and
 
 ### Practical exploitations
 
-Unfortunately, at this point of time I don't have permission to disclose the full details of my findings as 6 month haven't gone by yet, however among all my findings had affected the following companies:
+Unfortunately, at this point of time I don't have permission to disclose the full details of my findings as 6 month haven't gone by yet, however among all my findings had affected companies like: Google, Snapchat, Twitter, HackerOne, BugCrowd, Amazon, Facebook and many more.
 
-![impacted](/images/impacted.png)
-
-And hundred of thousands websites on total from the "0 days" on these 3rd party vendors (which some of those are not fixed yet)
+also, hundred of thousands websites on total affected from the "0 days" on these 3rd party vendors (which some of those are not fixed yet)
 
 **Most Common Findings**
 - [X] Subdomain Takeovers
