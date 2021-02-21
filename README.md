@@ -355,10 +355,8 @@ also, hundred of thousands websites on total affected from the "0 days" on these
 
 ### Takeaways
 
-**This subject will only grow and become more frequent**
+![conclusion](/images/conclusion.png)
 
-**Caution when assigning CNAME records**
-
-**Monitoring**
+![thanks](/images/thanks.png)
 
 ## END
