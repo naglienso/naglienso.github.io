@@ -16,7 +16,7 @@ tags:
 
 ## Agenda
 
-During my last couple of months engaging with bug bounties on companies who hold responsible disclosure policy, I have encountered what might be called as some sort of routine, which helped me score bounties on companies regardless of their size.
+During the last couple of month engaging with bug bounties on companies who hold responsible disclosure policy, I have encountered what might be called as some sort of routine, which helped me scoring bounties on companies regardless of their size or resources.
 
 This is due to what I will refer on this blog post as "Vulnerability Inheritance"
 
@@ -27,17 +27,19 @@ In this blog I'll cover the following:
 
 ### General
 
-In today’s world, software companies are growing rapidly and so the need for new designs and features to implement ontop of the company current niche, which draws large portion of the software developers attention.
+In today’s world, software companies are growing rapidly and so the need for new designs and features to implement ontop of the company current niche, which draws large portion of the developers attention.
 
-Companies will opt to “adopt” 3rd party services to achieve certain functionality goals, which would give them a "cheap" and time rewarding solution instead of investing manpower on maintaining and devloping certain "sideways" features which are already being maintaned and constantly developed by big companies.
+Companies will opt to “adopt” 3rd party services to achieve certain functionality goals, which would give them a "cheap" and time rewarding solution instead of investing manpower on maintaining and devloping certain "sideways" features which are already being maintaned and constantly developed by big 3rd party vendors.
 
-While doing so is indeed rewarding and has many benefits, it do come out with a security price which needs to be considered and handeld correctly by the companies.
+With this approach has it's advantages, it do come out with a security price which needs to be considered and handeld correctly by the customers.
 
-The 2 main methods in which we can integrate 3rd party services within our company domains are the following:
+The 2 main ways in which we can integrate 3rd party services within our company domains are the following:
 
 ![2ways](/images/2ways.png)
 
-The main area which I will cover are within the CNAME and A records integrations, for <script> and <iframe> integrations, there are several vulnerabilities which can arise and I'd suggest watching our Chief Architect at enso.security talk about postMessage exploitations which we had given earlier this year.
+The main area which I will cover is within the CNAME and A records integrations, for <script> and <iframe> integrations, there are several vulnerabilities which can arise and I'd suggest watching our Chief Architect at enso.security talk about postMessage exploitations which we had given earlier this year.
+
+**Adding link to posta slides**
 
 **Understanding CNAMES and A records**
 
@@ -53,7 +55,7 @@ As a result, example.com points to the server IP address, and www.example.com po
 
 ![dns_cname](/images/cname_dns.png)
 
-By observing the DNS flow above, you could already start to glimpse the point why security vulnerabilities are being arised from integrations as such.
+By observing the DNS flow above, we could already start to glimpse the point why security vulnerabilities are being arised from such actions.
 
 There are 2 ways to implement 3rd party integrations through DNS records:
 
@@ -63,7 +65,7 @@ There are 2 ways to implement 3rd party integrations through DNS records:
 
 ![flow_nagli](/images/flow.png)
 
-After understanding the basics, we can dive deeper into the threat and attack models section
+After understanding the basics, we can dive deeper into the threat and attack models section.
 
 ### Threat and attack models
 
@@ -71,23 +73,26 @@ After understanding the basics, we can dive deeper into the threat and attack mo
 
 As we approach the threats and attack models phase, we need to understand that the main attack vectors we will look for are **Client Side Vulnerabilities**, this should make sense by now as we are attacking the company subdomain which is being served as an alias to third party service, in other words:
 
-Achieveing RCE on the target would actually mean that we have remote code execution on the vendor's server
-Achieving SSRF on the target would actually mean that we have Server Side Request Forgery from the vendor's IP
-Achieveing XXE on the target would actually mean that we have XML External Entity attack on the vendor's server
+* Achieveing RCE on the target would actually mean that we have remote code execution on the vendor's server
+* Achieving SSRF on the target would actually mean that we have Server Side Request Forgery from the vendor's IP
+* Achieveing XXE on the target would actually mean that we have XML External Entity attack on the vendor's server
 
-Those attacks are severe and can affect the subdomain we are targeting, but as for the impact we are going for to the actual company we are targeting, it will still remain within the same attack models that we can achieve from Client Side Vulnerabilities on the specific subdomain.
+Those attacks are severe and can affect the subdomain which we are targeting which in other words is the 3rd party vendor, but as for the impact for our assessment we need to show the impcat for our client or target, and those will be achieveable by without focusing on the Server Side Vulnerabilties.
 
-I believe that Subdomain takeovers and Dangling dns records are wide known and understood with the community, there are bunch of great tutorials and explanations on these attacks and It's not the main discusstion area of the blog, yet it has to be mentioned and I'll share on the reconnaissance my methodology targeting and automatic the process of finding those.
+I believe that Subdomain takeovers and Dangling DNS records are wide known and understood with the community, there are bunch of great tutorials and explanations on these attacks and it's not the main spotlight of the blog, yet it has to be mentioned because it's common to stumble upon these.
 
 ![tko](/images/tko.png)
 
 ![dangling](/images/dangling.png)
 
+The referance which should always be kept aside for these issues is [Can I takeover the Subdomain?](https://github.com/EdOverflow/can-i-take-over-xyz), which holds information about wether or not we can takeover a subdomain given it's vendor name.
+
+
 Now, let's dive into the main part of the talk.
 
-Client side vulnerabilities such as Cross Site Scripting and Open Redirects are often considered the most common bugs to be found by bug bounty hunters, as such many defence measures are being integrated and considered by companies todays such as implementing CSP (Content-Security-Policy), Deploying a WAF (Web Application Firewall), strict regex controls and sanitizing user input on all fields at all costs (Almost an impossible task).
+Client side vulnerabilities such as Cross Site Scripting and Open Redirects are often considered the most common bugs to be found by bug bounty hunters, as such many defence measures are being integrated and considered by companies todays such as implementing CSP (Content-Security-Policy), Deploying a WAF (Web Application Firewall), strict regex controls and sanitizing user input on all fields at all costs (almost an impossible task).
 
-Those solutions are good, although there are many WAF and CSP Bypasses which are being discovered from time to time, it will mostly do good job with protecting your companies domain from the straight forward attacks.
+These solutions are good, although there are many WAF and CSP Bypasses which are being discovered from time to time, it will mostly do good job with protecting your companies domain from the straight forward attacks.
 
 **But**,
 When we integrate 3rd party service to our domain by pointing to it with a CNAME or A record, we are serving an alias of the vendors website, and the defense measures which we have taken throught the entire development process are no longer effective.
@@ -228,7 +233,7 @@ The Reconnaissance part should be divded to 2 main parts:
 
 Our first task is to find a potenial target to test for possible vulnerabilities.
 
-I prefer to scan the our target first and look for 3rd parties services which are integrated already in their flow, although a researcher could opt to find web 0-days on 3rd party vendor services before looking for any target, I'm not sure it hold the ethical phase if the vendor won't operate any responsible disclosure policy (which is really bad for vendor's to not have one of those)
+I prefer to scan the our target first and look for 3rd parties services which are integrated already in their flow, although a researcher could opt to find web 0-days on 3rd party vendor services before looking for any target, I'm not sure it hold the ethical phase if the vendor won't operate any responsible disclosure policy (which is really bad for vendors to not have one of those)
 
 And you might find a vulnerability which won't affect any target who offers bug bounties or CVE to award your effort, so going through our target assets and expanding further should be the way to go.
 
@@ -358,6 +363,6 @@ also, hundred of thousands websites on total affected from the "0 days" on these
 
 ![conclusion](/images/conclusion.png)
 
-![thanks](/images/thanks.png)
-
 ## END
+
+![thanks](/images/thanks.png)
