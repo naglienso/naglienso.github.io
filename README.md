@@ -342,11 +342,12 @@ Unfortunately, at this point of time I don't have permission to disclose the ful
 
 also, hundred of thousands websites on total affected from the "0 days" on these 3rd party vendors (which some of those are not fixed yet)
 
-**Most Common Findings**
+** Findings **
 - [X] Subdomain Takeovers
 - [X] Stored XSS on 3rd party email templates
 - [X] Reflected XSS on events platform
 - [X] Open Redirect on 2 Learning platforms
+- [X] Client Side Template Injection to Stored XSS on customer success vendor
 - [X] Account takeover on Survey platform
 
 **Proof of concepts**
